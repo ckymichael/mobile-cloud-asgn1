@@ -147,7 +147,7 @@ public interface VideoSvcApi {
 	 * @return
 	 */
 	@GET(VIDEO_SVC_PATH)
-	public Collection<Video> getVideoList();
+	Collection<Video> getVideoList();
 	
 	/**
 	 * This endpoint allows clients to add Video objects by sending POST requests
@@ -156,7 +156,7 @@ public interface VideoSvcApi {
 	 * @return
 	 */
 	@POST(VIDEO_SVC_PATH)
-	public Video addVideo(@Body Video v);
+	Video addVideo(@Body Video v);
 	
 	/**
 	 * This endpoint allows clients to set the mpeg video data for previously
@@ -170,7 +170,7 @@ public interface VideoSvcApi {
 	 */
 	@Multipart
 	@POST(VIDEO_DATA_PATH)
-	public VideoStatus setVideoData(@Path(ID_PARAMETER) long id, @Part(DATA_PARAMETER) TypedFile videoData);
+	VideoStatus setVideoData(@Path(ID_PARAMETER) long id, @Part(DATA_PARAMETER) TypedFile videoData);
 	
 	/**
 	 * This endpoint should return the video data that has been associated with
