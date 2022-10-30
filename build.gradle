@@ -38,7 +38,8 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'junit:junit:4.12'
+    // get Class Not Found Exception when running JUnit test if using testImplementation, since junit is used in Autograding as an application
+    implementation 'junit:junit:4.12'
 
     runtimeOnly 'com.h2database:h2'
 }
