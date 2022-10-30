@@ -13,7 +13,9 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -53,8 +55,10 @@ public class VideoServiceImpl implements VideoService {
      */
     @Override
     public void addVideo(Video... v) {
-        Arrays.stream(v).forEach(new NewVideoProcessor());
-        videoRepository.saveAll(Arrays.asList(v));
+        List<Video> videos = Arrays.stream(v)
+                .peek(new NewVideoProcessor())
+                .collect(Collectors.toList());
+        videoRepository.saveAll(videos);
     }
 
     /**
