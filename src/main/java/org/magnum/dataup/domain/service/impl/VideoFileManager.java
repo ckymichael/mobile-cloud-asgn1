@@ -15,7 +15,10 @@
  * limitations under the License.
  * 
  */
-package org.magnum.dataup;
+package org.magnum.dataup.domain.service.impl;
+
+import org.magnum.dataup.domain.model.Video;
+import org.springframework.stereotype.Service;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -26,8 +29,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
-import org.magnum.dataup.model.Video;
-
 /**
  * This class provides a simple implementation to store video binary
  * data on the file system in a "videos" folder. The class provides
@@ -36,19 +37,8 @@ import org.magnum.dataup.model.Video;
  * @author jules
  *
  */
+@Service
 public class VideoFileManager {
-
-	/**
-	 * This static factory method creates and returns a 
-	 * VideoFileManager object to the caller. Feel free to customize
-	 * this method to take parameters, etc. if you want.
-	 * 
-	 * @return
-	 * @throws IOException
-	 */
-	public static VideoFileManager get() throws IOException {
-		return new VideoFileManager();
-	}
 	
 	private Path targetDir_ = Paths.get("videos");
 	

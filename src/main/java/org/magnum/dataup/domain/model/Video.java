@@ -15,7 +15,17 @@
  * limitations under the License.
  * 
  */
-package org.magnum.dataup.model;
+package org.magnum.dataup.domain.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fluentinterface.ReflectionBuilder;
+import com.fluentinterface.builder.Builder;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.util.Objects;
 
 /**
                     ___                    ___           ___                            
@@ -40,27 +50,102 @@ package org.magnum.dataup.model;
    \:\  \        \:\/:/  /     \:\/:/  /       \::/  /   \:\  \      ~~~~\:\  \         
     \:\__\        \::/  /       \::/  /        /:/  /     \:\__\          \:\__\        
      \/__/         \/__/         \/__/         \/__/       \/__/           \/__/        
- *
  */
-public class VideoStatus {
 
-	public enum VideoState {
-		READY, PROCESSING
+@Entity
+@Table(name = "Videos")
+public class Video {
+
+	public static VideoBuilder create() {
+		return ReflectionBuilder.implementationFor(VideoBuilder.class).create();
 	}
 
-	private VideoState state;
-
-	public VideoStatus(VideoState state) {
-		super();
-		this.state = state;
+	public interface VideoBuilder extends Builder<Video> {
+		public VideoBuilder withTitle(String title);
+		public VideoBuilder withDuration(long duration);
+		public VideoBuilder withSubject(String subject);
+		public VideoBuilder withContentType(String contentType);
 	}
 
-	public VideoState getState() {
-		return state;
+	@Id
+	private long id;
+	private String title;
+	private long duration;
+	private String location;
+	private String subject;
+	private String contentType;
+
+	@JsonIgnore
+	private String dataUrl;
+
+	public long getId() {
+		return id;
 	}
 
-	public void setState(VideoState state) {
-		this.state = state;
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public long getDuration() {
+		return duration;
+	}
+
+	public void setDuration(long duration) {
+		this.duration = duration;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+
+	@JsonProperty
+	public String getDataUrl() {
+		return dataUrl;
+	}
+
+	@JsonIgnore
+	public void setDataUrl(String dataUrl) {
+		this.dataUrl = dataUrl;
+	}
+
+	public String getContentType() {
+		return contentType;
+	}
+
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(getTitle(), getDuration());
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return (obj instanceof Video)
+				&& Objects.equals(getTitle(), ((Video) obj).getTitle())
+				&& getDuration() == ((Video) obj).getDuration();
 	}
 
 }

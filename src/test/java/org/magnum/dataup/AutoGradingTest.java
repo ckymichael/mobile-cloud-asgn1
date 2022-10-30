@@ -59,9 +59,9 @@ import java.util.UUID;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
-import org.magnum.dataup.model.Video;
-import org.magnum.dataup.model.VideoStatus;
-import org.magnum.dataup.model.VideoStatus.VideoState;
+import org.magnum.dataup.domain.model.Video;
+import org.magnum.dataup.domain.model.VideoStatus;
+import org.magnum.dataup.domain.model.VideoStatus.VideoState;
 
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
